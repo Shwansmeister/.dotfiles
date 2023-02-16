@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+WEATHER=$(wego -f json -d 0 | awk 'NR==5 {$1=""; print $0}' | sed -e 's/"//g' -e 's/,//g' -e 's/\ //')
+TEMP=$(wego -f json -d 0 | awk 'NR==6 {$1=""; print}' | awk -F'.' '{print $1}' | sed 's/,//g')
+# WEATHER=$(wego -aat-monochrome | grep -m 1 '°.' | grep -Eo -e '-?[[:digit:]].*' | awk '{print $1$3}')
+#
+echo "${WEATHER^}${TEMP}°C"
+
+
+
+# WEATHER=$(curl -sf wttr.in/$LOCATION?format="%x\n")
+# TEMP=$(curl -sf wttr.in/$LOCATION?format="%t\n")
+#
+# case $WEATHER in
+  # \m\m)
+    # ICON="摒" ;;
+  # \?)
+    # ICON="" ;;
+  # \=)
+    # ICON="敖" ;;
+  # \/\/\/)
+    # ICON="歹" ;;
+  # \/\/)
+    # ICON="歹" ;;
+  # \*\*)
+    # ICON="流" ;;
+  # \*\/\*)
+    # ICON="流" ;;
+  # \/)
+    # ICON="殺" ;;
+  # \.)
+    # ICON="殺" ;;
+  # \X)
+    # ICON="ﭽ" ;;
+  # \X\/)
+    # ICON="ﭽ" ;;
+  # \*)
+    # ICON="流" ;;
+  # \*\/)
+    # ICON="流" ;;
+  # \m)
+    # ICON="杖" ;;
+  # \O)
+    # ICON="滛" ;;
+  # \/\!\/)
+    # ICON="朗" ;;
+  # \!\/)
+    # ICON="ﭼ" ;;
+  # \*\!\*)
+    # ICON="朗" ;;
+  # \m\m\m)
+    # ICON=""
+# esac
+#
+# echo "${ICON} ${TEMP}"

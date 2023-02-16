@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+PAC=$(pacman -Qu | grep -Fcv "[ignored]")
+echo "Pacman $PAC"
+

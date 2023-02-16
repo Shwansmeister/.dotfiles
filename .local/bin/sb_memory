@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# USED= free -h | awk '/^Mem/ {print $3}' | sed s/[^0-9]//g
+# TOTAL= free -h | awk '/^Mem/ {print $2}' | sed s/[^0-9]//g
+ABSOLUTE=$(free -h | awk '/^Mem/ {printf $3"/"$2}' | sed s/i//g) 
+RELATIVE=$(free | awk '/^Mem/ {printf "%0.0f\n", $3/$2*100}')
+
+echo "${ABSOLUTE}~${RELATIVE}%"
+

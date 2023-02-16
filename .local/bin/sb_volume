@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+VOL=$(amixer get Master | awk 'NR==5 {print}' | \
+    sed -e 's/\[//g' -e 's/\]//g' -e 's/%//g' -e '$x;$G;/\(.*\)0/!H;//!{$!d}; $!x;$s//\1/;s/^\n//')
+PERC=$(echo "${VOL}" | awk '{if($6 == "on")
+    {print $4}
+    else
+    {print "0"}}')
+DB=$(echo "${VOL}" | awk '{print $5}')
+
+[ $PERC = 0 ] && echo "$DB[xxxxxxxxxx]" || \
+  case $((
+    (PERC <= 10)                 *1+
+    (PERC >  10 && PERC <= 20)   *2+
+    (PERC >  20 && PERC <= 30)   *3+
+    (PERC >  30 && PERC <= 40)   *4+
+    (PERC >  40 && PERC <= 50)   *5+
+    (PERC >  50 && PERC <= 60)   *6+
+    (PERC >  60 && PERC <= 70)   *7+
+    (PERC >  70 && PERC <= 80)   *8+
+    (PERC >  80 && PERC <= 90)   *9+
+    (PERC >  90 && PERC <= 100)  *10)) in
+      (1) echo "$DB[=========]";;
+      (2) echo "$DB[=========]";;
+      (3) echo "$DB[=========]";;
+      (4) echo "$DB[=========]";;
+      (5) echo "$DB[=========]";;
+      (6) echo "$DB[=========]";;
+      (7) echo "$DB[=========]";;
+      (8) echo "$DB[=========]";;
+      (9) echo "$DB[=========]";;
+      (10)echo "$DB[=========]";;
+  esac

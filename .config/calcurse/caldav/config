@@ -1,0 +1,12 @@
+# CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav
+
+Hostname = apidata.googleusercontent.com
+path = /caldav/v2/lucas9041@gmail.com/events/
+AuthMethod = oauth2
+SyncFilter = cal
+
+[OAuth2]
+ClienID = 278661969558-3nc5hsdm7os15l5p6jmpjfjuur1nf0ip.apps.googleusercontent.com
+ClientSecret = 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 
+scope = https://www.googleapis.com/auth/calendar
+RedirectURI = https://127.0.0.1

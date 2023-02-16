@@ -1,0 +1,37 @@
+-- Documentation can be found at:
+-- https://codeberg.org/xmobar/xmobar/src/branch/master/doc/quick-start.org
+
+Config { overrideRedirect = False
+  , font     = "xft:mononokiNerdFontMono:regular:size=11:antialias=true:hinting=true"
+  , bgColor  = "#2f383e"
+  , fgColor  = "#d3c6aa"
+  -- , alpha    = 200
+  , position = TopSize L 100 25
+  -- , border   = BottomB
+  -- , textOffset = 10
+  , allDesktops = True
+  , pickBroadest = False
+  , lowerOnStart = True
+  , commands = [ Run Com ".local/bin/sb_clock" [] "clock" 10 
+    , Run Com ".local/bin/sb_weather" [] "weather" 6000
+    , Run Com ".local/bin/sb_package" [] "pacman" 36000
+    , Run Com ".local/bin/sb_volume" [] "volume" 10
+    , Run Alsa "default" "Master" 
+      [ "--template", "<dB>dB[<volumebar>]<status>"
+      , "--suffix" , "True"
+      , "--ddigits" , "1"
+      , "--"
+      , "--volume-icon-pattern", "<icon=./icon/test_%%.xpm/>"
+      , "--on", ""
+      ]
+    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 10
+    , Run Com ".local/bin/sb_mail" [] "mail" 10
+    -- , Run Mail 
+    --   [ ("", "~/.local/share/mail/lucas.mendonck@outlook.com/INBOX/")]
+    --   "mail"
+    , Run UnsafeXPropertyLog "_XMONAD_LOG_1"
+    ]
+  , sepChar  = "%"
+  , alignSep = "}{"
+  , template = "%_XMONAD_LOG_1% }{ <box type=Bottom width=2 mb=2 color=#a6c080>%alsa:default:Master%</box> ⏽ <box type=Bottom width=2 mb=2 color=#a6c080>Mail %mail%</box> ⏽ <box type=Bottom width=2 mb=2 color=#a6c080>%pacman%</box> ⏽ <box type=Bottom width=2 mb=2 color=#a6c080>%weather%</box> ⏽ <box type=Bottom width=2 mb=2 color=#a6c080>%clock%</box> "
+  }
